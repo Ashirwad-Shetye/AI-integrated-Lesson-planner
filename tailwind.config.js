@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         roboMono: "Roboto Mono, monospace",
+        roboSlab: "Roboto Slab, serif",
+        yeseva: "Yeseva One, cursiv",
+        dance: "Dancing Script, cursive",
       },
     },
   },
