@@ -1,3 +1,4 @@
+import Footer from "./components/footer";
 import Planner from "./components/form";
 import Hero from "./components/hero";
 import Nav from "./components/nav";
@@ -8,6 +9,7 @@ function App() {
       <Nav />
       <Hero />
       <Planner />
+      <Footer />
     </div>
   );
 }
