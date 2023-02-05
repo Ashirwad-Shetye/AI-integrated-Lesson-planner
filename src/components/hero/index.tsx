@@ -8,7 +8,7 @@ function Hero() {
         <div className="relative h-80 w-full lg:w-8/12">
           <div
             className="relative mx-10 h-80 md:h-72 flex flex-col justify-center bg-white space-y-5 font-roboSlab w-10/12 lg:w-9/12
-                    border-2 border-black  z-50"
+                    border-2 border-black  z-40"
           >
             <div className="text-4xl md:text-5xl mx-5">
               <h1>Quicker way to make Lesson Plans.</h1>
