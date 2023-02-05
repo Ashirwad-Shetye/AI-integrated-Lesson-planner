@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+
+const initialValues = {
+  subject: "",
+  topic: "",
+  duration: "",
+  grade: "",
+  activities: "",
+};
 
 function Planner() {
+  const [values, setValues] = useState(initialValues);
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    e.preventDefault();
+  };
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
   return (
     <div className="w-full border-2 border-black mx-auto max-w-4xl mt-20">
       <div className="mx-16 flex flex-col items-center">
@@ -10,9 +35,12 @@ function Planner() {
             <label className="font-roboMono text-lg">Subject</label>
             <input
               type="text"
-              maxLength={56}
+              name="subject"
+              value={values.subject}
+              onChange={handleChange}
+              maxLength={20}
               placeholder="e.g. Biology, Mathematics"
-              className="w-full p-5 md:w-10/12 h-8 border-2 border-black placeholder:text-center"
+              className="w-full p-5 md:w-10/12 h-8 border-2 text-center border-black placeholder:text-center"
             />
           </div>
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
@@ -21,16 +49,24 @@ function Planner() {
             </label>
             <input
               type="text"
-              maxLength={56}
+              name="topic"
+              value={values.topic}
+              onChange={handleChange}
+              maxLength={50}
               placeholder="e.g. Plant propagation, Probability"
-              className="w-full p-5 md:w-10/12 placeholder:text-center h-8 border-2 border-black"
+              className="w-full p-5 md:w-10/12 text-center placeholder:text-center h-8 border-2 border-black"
             />
           </div>
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">
               Select grade of students
             </label>
-            <select name="grade" className="h-8 border-2 border-black">
+            <select
+              name="grade"
+              value={values.grade}
+              onChange={handleChange}
+              className="h-8 border-2 border-black"
+            >
               <option value="Grade 1 (students aged 6 to 7)">Grade 1</option>
               <option value="Grade 2 (students aged 7 to 8)">Grade 2</option>
               <option value="Grade 3 (students aged 8 to 9)">Grade 3</option>
@@ -53,7 +89,12 @@ function Planner() {
           </div>
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">Duration of lesson</label>
-            <select name="duration" className="h-8 border-2 border-black">
+            <select
+              name="duration"
+              value={values.duration}
+              onChange={handleChange}
+              className="h-8 border-2 border-black"
+            >
               <option value="15 min">15 min</option>
               <option value="30 min">30 min</option>
               <option value="45 min">45 min</option>
@@ -70,15 +111,21 @@ function Planner() {
               </p>
             </label>
             <textarea
+              maxLength={280}
               name="activities"
+              value={values.activities}
+              onChange={handleChange}
               placeholder="e.g. 'Begin lecture with a presentation' / 'Students take initiative to explain what they learned to 
               whole class at the end of lecture'"
-              className="w-full p-5 h-32 md:w-10/12 border-2 border-black"
+              className="w-full p-5 h-32 md:w-10/12 text-center border-2 border-black"
             ></textarea>
           </div>
           <div className="mt-5 mb-10 relative hover:scale-125 duration-200">
             <div className="w-28 h-12 bg-black absolute top-2 left-2 -z-10"></div>
-            <button className="border-2 border-black h-12 w-28 text-xl font-roboSlab bg-purple-300">
+            <button
+              onClick={handleSubmit}
+              className="border-2 border-black h-12 w-28 text-xl font-roboSlab bg-purple-300"
+            >
               Submit
             </button>
           </div>
