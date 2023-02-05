@@ -11,6 +11,8 @@ const initialValues = {
 function Planner() {
   const [values, setValues] = useState(initialValues);
 
+  // const [buttonLoader, setButtonLoader] = useState(true);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -22,6 +24,16 @@ function Planner() {
   };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
+    if (
+      values.subject.length === 0 ||
+      values.topic.length === 0 ||
+      values.grade.length === 0 ||
+      values.duration.length === 0 ||
+      values.activities.length === 0
+    ) {
+      alert("Kindly fill all the fields");
+    }
+
     e.preventDefault();
     console.log(values);
   };
@@ -32,7 +44,9 @@ function Planner() {
         <h1 className="text-5xl font-roboSlab my-10">Lesson Planner</h1>
         <form className="flex flex-col items-center">
           <div className="flex flex-col items-center mb-4 space-y-2 w-full">
-            <label className="font-roboMono text-lg">Subject</label>
+            <label className="font-roboMono text-lg">
+              Subject<sup className="text-red-500">*</sup>
+            </label>
             <input
               type="text"
               name="subject"
@@ -46,6 +60,7 @@ function Planner() {
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">
               Specify the topic and learnings
+              <sup className="text-red-500">*</sup>
             </label>
             <input
               type="text"
@@ -59,7 +74,7 @@ function Planner() {
           </div>
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">
-              Select grade of students
+              Select grade of students<sup className="text-red-500">*</sup>
             </label>
             <select
               name="grade"
@@ -88,7 +103,9 @@ function Planner() {
             </select>
           </div>
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
-            <label className="font-roboMono text-lg">Duration of lesson</label>
+            <label className="font-roboMono text-lg">
+              Duration of lesson<sup className="text-red-500">*</sup>
+            </label>
             <select
               name="duration"
               value={values.duration}
@@ -106,6 +123,7 @@ function Planner() {
           <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg text-center md:w-11/12">
               Ideas/activities you have planned.
+              <sup className="text-red-500">*</sup>
               <p className="text-sm">
                 (add atleast 2 for better results. more ideas = better results)
               </p>
