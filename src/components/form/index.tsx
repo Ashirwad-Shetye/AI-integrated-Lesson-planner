@@ -2,29 +2,31 @@ import React from "react";
 
 function Planner() {
   return (
-    <div className="w-full border-2 border-black mx-auto max-w-5xl mt-20">
+    <div className="w-full border-2 border-black mx-auto max-w-4xl mt-20">
       <div className="mx-16 flex flex-col items-center">
-        <h1 className="text-5xl font-roboSlab my-10">Planner</h1>
+        <h1 className="text-5xl font-roboSlab my-10">Lesson Planner</h1>
         <form className="flex flex-col items-center">
           <div className="flex flex-col items-center mb-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">Subject</label>
             <input
               type="text"
               maxLength={56}
-              className="w-8/12 h-8 border-2 border-black"
+              placeholder="e.g. Biology, Mathematics"
+              className="w-full p-5 md:w-10/12 h-8 border-2 border-black placeholder:text-center"
             />
           </div>
-          <div className="flex flex-col items-center my-4 space-y-2">
+          <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">
               Specify the topic and learnings
             </label>
             <input
               type="text"
               maxLength={56}
-              className="w-8/12 h-8 border-2 border-black"
+              placeholder="e.g. Plant propagation, Probability"
+              className="w-full p-5 md:w-10/12 placeholder:text-center h-8 border-2 border-black"
             />
           </div>
-          <div className="flex flex-col items-center my-4 space-y-2">
+          <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">
               Select grade of students
             </label>
@@ -49,7 +51,7 @@ function Planner() {
               </option>
             </select>
           </div>
-          <div className="flex flex-col items-center my-4 space-y-2">
+          <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg">Duration of lesson</label>
             <select name="duration" className="h-8 border-2 border-black">
               <option value="15 min">15 min</option>
@@ -60,7 +62,7 @@ function Planner() {
               <option value="120 min">120 min</option>
             </select>
           </div>
-          <div className="flex flex-col items-center my-4 space-y-2">
+          <div className="flex flex-col items-center my-4 space-y-2 w-full">
             <label className="font-roboMono text-lg text-center md:w-11/12">
               Ideas/activities you have planned.
               <p className="text-sm">
@@ -69,11 +71,17 @@ function Planner() {
             </label>
             <textarea
               name="activities"
-              id=""
-              className="w-8/12 border-2 border-black"
+              placeholder="e.g. 'Begin lecture with a presentation' / 'Students take initiative to explain what they learned to 
+              whole class at the end of lecture'"
+              className="w-full p-5 h-32 md:w-10/12 border-2 border-black"
             ></textarea>
           </div>
-          <button>Submit</button>
+          <div className="mt-5 mb-10 relative hover:scale-125 duration-200">
+            <div className="w-28 h-12 bg-black absolute top-2 left-2 -z-10"></div>
+            <button className="border-2 border-black h-12 w-28 text-xl font-roboSlab bg-purple-300">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
