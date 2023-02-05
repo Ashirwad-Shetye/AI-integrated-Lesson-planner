@@ -1,3 +1,4 @@
+import Planner from "./components/form";
 import Hero from "./components/hero";
 import Nav from "./components/nav";
 
@@ -6,6 +7,7 @@ function App() {
     <div className="h-screen">
       <Nav />
       <Hero />
+      <Planner />
     </div>
   );
 }
