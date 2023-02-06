@@ -4,8 +4,9 @@ import cube from "../../assets/loader/cube.gif";
 const initialValues = {
   subject: "",
   topic: "",
-  duration: "50 minutes",
-  grade: "Grade 10 (students aged 15 to 16)",
+  learningIntention: "",
+  lessonLength: "50 minutes",
+  level: "Grade 10 (students aged 15 to 16)",
   activities: "",
 };
 
@@ -24,12 +25,15 @@ function Planner() {
     e.preventDefault();
   };
 
+  // console.log(process.env.OPEN_AI_API_KEY);
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     if (
       values.subject.length === 0 ||
       values.topic.length === 0 ||
-      values.grade.length === 0 ||
-      values.duration.length === 0 ||
+      values.level.length === 0 ||
+      values.lessonLength.length === 0 ||
+      values.learningIntention.length === 0 ||
       values.activities.length === 0
     ) {
       alert("Kindly fill all the fields");
@@ -86,12 +90,28 @@ function Planner() {
               />
             </div>
             <div className="flex flex-col items-center my-4 space-y-2 w-full">
+              <label className="font-roboMono text-lg text-center md:w-11/12">
+                What would you like then the main learning intention of this
+                lesson to be?
+                <sup className="text-red-500">*</sup>
+              </label>
+              <input
+                type="text"
+                name="topic"
+                value={values.learningIntention}
+                onChange={handleChange}
+                maxLength={50}
+                placeholder="e.g. to understand how plants propagate"
+                className="w-full p-5 md:w-10/12 text-center placeholder:text-center h-8 border-2 border-black"
+              />
+            </div>
+            <div className="flex flex-col items-center my-4 space-y-2 w-full">
               <label className="font-roboMono text-lg">
                 Select grade of students<sup className="text-red-500">*</sup>
               </label>
               <select
                 name="grade"
-                value={values.grade}
+                value={values.level}
                 onChange={handleChange}
                 className="h-8 border-2 border-black"
               >
@@ -131,7 +151,7 @@ function Planner() {
               </label>
               <select
                 name="duration"
-                value={values.duration}
+                value={values.lessonLength}
                 onChange={handleChange}
                 className="h-8 border-2 border-black"
               >
@@ -144,6 +164,7 @@ function Planner() {
                 <option value="120 minutes">120 min</option>
               </select>
             </div>
+
             <div className="flex flex-col items-center my-4 space-y-2 w-full">
               <label className="font-roboMono text-lg text-center md:w-11/12">
                 Ideas/activities you have planned.
@@ -158,8 +179,7 @@ function Planner() {
                 name="activities"
                 value={values.activities}
                 onChange={handleChange}
-                placeholder="e.g. 'Begin lecture with a presentation' / 'Students take initiative to explain what they learned to 
-              whole class at the end of lecture'"
+                placeholder="e.g. 'Begin lecture with a presentation' / 'Students take initiative to explain what they learned to whole class at the end of lecture'"
                 className="w-full p-5 h-32 md:w-10/12 text-center border-2 border-black"
               ></textarea>
             </div>
