@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import cube from "../../assets/loader/cube.gif";
+import { generateResponse } from "../../api/apiCalls";
+import Output from "../output";
 
 const initialValues = {
   subject: "",
@@ -13,7 +14,11 @@ const initialValues = {
 function Planner() {
   const [values, setValues] = useState(initialValues);
 
-  const [loader, setLoader] = useState(false);
+  const [resLoader, setResLoader] = useState(false);
+
+  const [renderOutput, setRenderOutput] = useState(false);
+
+  const [responses, setResponses] = useState("");
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -25,9 +30,9 @@ function Planner() {
     e.preventDefault();
   };
 
-  // console.log(process.env.OPEN_AI_API_KEY);
+  // console.log(process.env.REACT_APP_API_KEY);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     if (
       values.subject.length === 0 ||
       values.topic.length === 0 ||
@@ -38,26 +43,33 @@ function Planner() {
     ) {
       alert("Kindly fill all the fields");
     } else {
-      setLoader(true);
+      setRenderOutput(true);
     }
 
+    let response = generateResponse(values);
+
     e.preventDefault();
-    console.log(values);
+    setResponses(await response);
+    if (await response) {
+      setRenderOutput(true);
+      setValues(initialValues);
+    }
   };
 
   return (
     <div className="w-full h-fit border-2 border-black mx-auto max-w-4xl mt-20">
       <div id="height" className="mx-16  flex flex-col items-center">
         <h1 className="text-5xl font-roboSlab my-10">Lesson Planner</h1>
-        {loader ? (
-          <div className="mb-10">
-            <img src={cube} alt="loading animation" className="w-72 -mt-10" />
-            <div className="flex flex-col items-center -mt-12">
-              <p>Generating your lesson plan</p>
-              <p>This might take few minutes.</p>
-              <p>(depends on intricacy of details)</p>
-            </div>
-          </div>
+        {renderOutput ? (
+          <>
+            <Output
+              resLoader={resLoader}
+              setResLoader={setResLoader}
+              setRenderOutput={setRenderOutput}
+              setResponses={setResponses}
+              data={responses}
+            />
+          </>
         ) : (
           <form className="flex flex-col items-center">
             <div className="flex flex-col items-center mb-4 space-y-2 w-full">
@@ -76,7 +88,7 @@ function Planner() {
             </div>
             <div className="flex flex-col items-center my-4 space-y-2 w-full">
               <label className="font-roboMono text-lg">
-                Specify the topic and learnings
+                Specify the topic
                 <sup className="text-red-500">*</sup>
               </label>
               <input
@@ -97,7 +109,7 @@ function Planner() {
               </label>
               <input
                 type="text"
-                name="topic"
+                name="learningIntention"
                 value={values.learningIntention}
                 onChange={handleChange}
                 maxLength={50}
